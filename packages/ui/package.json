@@ -4,7 +4,9 @@
   "private": true,
   "exports": {
     "./components/*": "./src/components/*.tsx",
-    "./lib/*": "./src/lib/*.tsx"
+    "./providers/*": "./src/providers/*.tsx",
+    "./lib/*": "./src/lib/*.tsx",
+    "./types-schemas": "./src/types-schemas.ts"
   },
   "scripts": {
     "lint": "eslint . --fix",
@@ -29,6 +31,7 @@
   "dependencies": {
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "lucide-react": "^1.14.0",
     "radix-ui": "^1.4.3",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"

@@ -1,10 +1,14 @@
 ---
+import { ModeToggle } from "@/components/mode-toggle";
 import Layout from "@/layouts/layout.astro";
-import { Button } from "@repo/ui/components/button";
+import { Button } from "@repo/ui/components/ui/button";
 ---
 
 <Layout>
-  <h1 class="text-4xl">Web app</h1>
+  <div class="flex items-center justify-between p-4">
+    <h1 class="text-4xl">Web app</h1>
+    <ModeToggle client:load />
+  </div>
   <p>A text paragraph</p>
-  <Button className="w-48">Shadcn button</Button>
+  <Button className="w-32">Shadcn button</Button>
 </Layout>

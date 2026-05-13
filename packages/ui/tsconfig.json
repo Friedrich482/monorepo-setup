@@ -1,8 +1,6 @@
 {
   "extends": "@repo/typescript-config/react-library.json",
   "compilerOptions": {
-    "rootDir": ".",
-    "outDir": "dist",
     "noEmit": true,
     "allowImportingTsExtensions": true,
     "strictNullChecks": true,
@@ -10,6 +8,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["src"],
+  "include": ["src", "../../apps/dashboard/src/providers"],
   "exclude": ["node_modules", "dist"]
 }

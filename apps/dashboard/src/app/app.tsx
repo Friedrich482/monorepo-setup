@@ -1,7 +1,11 @@
 import { Outlet } from "react-router";
 
-function App() {
-  return <Outlet />;
-}
+import { ThemeProvider } from "@/providers/theme-provider";
 
-export default App;
+export const App = () => {
+  return (
+    <ThemeProvider defaultTheme="dark">
+      <Outlet />
+    </ThemeProvider>
+  );
+};

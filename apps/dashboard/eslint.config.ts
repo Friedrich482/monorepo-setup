@@ -19,5 +19,8 @@ export default [
     languageOptions: {
       globals: globals.browser,
     },
+    rules: {
+      "react-refresh/only-export-components": "off",
+    },
   },
 ];
