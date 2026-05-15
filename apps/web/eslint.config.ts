@@ -3,7 +3,7 @@ import commonLintConfig from "@repo/eslint-config/lint";
 
 export default [
   ...commonLintConfig,
-  { ignores: ["**/eslint.config.ts", "./dist/**"] },
+  { ignores: ["**/eslint.config.ts", "./dist/**", "./.astro/**"] },
   {
     files: ["**/*.astro"],
     plugins: {
