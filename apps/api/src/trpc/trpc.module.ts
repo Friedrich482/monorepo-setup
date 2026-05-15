@@ -2,11 +2,10 @@ import { EnvService } from "@/env/env.service";
 import { Module } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 
-import { TrpcController } from "./trpc.controller";
+import { TrpcRouter } from "./trpc.router";
 import { TrpcService } from "./trpc.service";
 
 @Module({
-  controllers: [TrpcController],
-  providers: [TrpcService, JwtService, EnvService],
+  providers: [TrpcService, TrpcRouter, JwtService, EnvService],
 })
 export class TrpcModule {}
