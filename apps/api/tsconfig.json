@@ -12,7 +12,7 @@
     "rootDir": ".",
     "outDir": "./dist",
     "paths": {
-      "@/*": ["./src"]
+      "@/*": ["./src/*"]
     },
     "types": ["node"],
     "incremental": true,

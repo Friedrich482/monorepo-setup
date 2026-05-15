@@ -1,0 +1,108 @@
+import superjson from "superjson";
+
+import { JWTDto } from "@/common/dto";
+import { EnvService } from "@/env/env.service";
+import { errorFormatter } from "@/filters/error-formatter";
+import { Injectable } from "@nestjs/common";
+import { JwtService } from "@nestjs/jwt";
+import { initTRPC, TRPCError } from "@trpc/server";
+import * as trpcExpress from "@trpc/server/adapters/express";
+
+export type TrpcContext = {
+  req: trpcExpress.CreateExpressContextOptions["req"];
+  res: trpcExpress.CreateExpressContextOptions["res"];
+  user?: {
+    sub: string;
+  };
+};
+
+export const createContext = async (
+  opts: trpcExpress.CreateExpressContextOptions,
+): Promise<TrpcContext> => {
+  return {
+    req: opts.req,
+    res: opts.res,
+  };
+};
+
+@Injectable()
+export class TrpcService {
+  trpc;
+  constructor(
+    private readonly jwtService: JwtService,
+    private readonly envService: EnvService,
+  ) {
+    this.trpc = initTRPC.context<TrpcContext>().create({
+      transformer: superjson,
+      errorFormatter: ({ error, shape }) =>
+        errorFormatter({
+          environment: this.envService.get("NODE_ENV"),
+          error,
+          shape,
+        }),
+    });
+  }
+
+  // these routes are publicly accessible to everyone
+  publicProcedure() {
+    return this.trpc.procedure;
+  }
+
+  // these routes requires authentication:
+  protectedProcedure() {
+    const procedure = this.trpc.procedure.use(async (opts) => {
+      const payload = await this.getPayload(opts.ctx);
+
+      if (!payload) {
+        throw new TRPCError({ code: "UNAUTHORIZED" });
+      }
+      // user is authorized
+      return opts.next({
+        ctx: {
+          ...opts.ctx,
+          user: { sub: payload.sub },
+        },
+      });
+    });
+    return procedure;
+  }
+
+  async getPayload(ctx: TrpcContext) {
+    // get jwt token from cookies
+    const accessToken = ctx.req.cookies?.auth_token;
+
+    if (!accessToken) {
+      throw new TRPCError({
+        code: "UNAUTHORIZED",
+        message: "Token not found",
+      });
+    }
+
+    try {
+      const rawPayload = await this.jwtService.verifyAsync(accessToken, {
+        secret: this.envService.get("JWT_SECRET"),
+      });
+
+      const parsedPayload = JWTDto.safeParse(rawPayload);
+
+      if (!parsedPayload.success) {
+        throw new TRPCError({
+          code: "UNAUTHORIZED",
+        });
+      }
+
+      const data = parsedPayload.data;
+
+      return data;
+    } catch (error) {
+      if (error instanceof Error && error.name !== "JsonWebTokenError") {
+        console.error("Unexpected Error:", error);
+      }
+
+      throw new TRPCError({
+        code: "UNAUTHORIZED",
+        message: "An error occurred",
+      });
+    }
+  }
+}
