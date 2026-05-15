@@ -1,0 +1,12 @@
+{
+  "name": "@repo/trpc",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "dev": "tsc --watch",
+    "lint": "eslint . --fix",
+    "format": "prettier --write \"**/*.ts\"",
+    "build": "tsc"
+  }
+}
