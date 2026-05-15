@@ -8,7 +8,7 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 
-import { Theme } from "#types-schemas.ts";
+import { type Theme } from "#types-schemas.ts";
 
 export const ModeToggleContent = ({
   handleThemeClick,
