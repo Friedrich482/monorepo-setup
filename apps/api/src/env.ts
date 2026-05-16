@@ -6,6 +6,7 @@ export const envSchema = z.object({
   JWT_SECRET: z.string().trim().min(1),
 
   DASHBOARD_URL: z.url(),
+  WEB_APP_URL: z.url(),
 });
 
 export type Env = z.infer<typeof envSchema>;

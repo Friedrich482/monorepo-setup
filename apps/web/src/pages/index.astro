@@ -1,7 +1,10 @@
 ---
 import { ModeToggle } from "@/components/mode-toggle";
 import Layout from "@/layouts/layout.astro";
+import { trpc } from "@/utils/trpc";
 import { Button } from "@repo/ui/components/ui/button";
+
+const data = await trpc.getHello.query({ name: "Friedrich" });
 ---
 
 <Layout>
@@ -11,4 +14,5 @@ import { Button } from "@repo/ui/components/ui/button";
   </div>
   <p>A text paragraph</p>
   <Button className="w-32">Shadcn button</Button>
+  <p>Data fetched from the server: {data}</p>
 </Layout>
