@@ -48,15 +48,11 @@ export class TrpcService {
     return this.trpc.procedure;
   }
 
-  // these routes requires authentication:
+  // these routes requires authentication
   protectedProcedure() {
     const procedure = this.trpc.procedure.use(async (opts) => {
       const payload = await this.getPayload(opts.ctx);
 
-      if (!payload) {
-        throw new TRPCError({ code: "UNAUTHORIZED" });
-      }
-      // user is authorized
       return opts.next({
         ctx: {
           ...opts.ctx,
@@ -64,11 +60,12 @@ export class TrpcService {
         },
       });
     });
+
     return procedure;
   }
 
   async getPayload(ctx: TrpcContext) {
-    // get jwt token from cookies
+    // get JWT from cookies
     const accessToken = ctx.req.cookies?.auth_token;
 
     if (!accessToken) {

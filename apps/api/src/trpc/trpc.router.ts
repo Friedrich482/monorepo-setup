@@ -1,4 +1,4 @@
-import z from "zod";
+import { z } from "zod";
 
 import { INestApplication, Injectable } from "@nestjs/common";
 import * as trpcExpress from "@trpc/server/adapters/express";
