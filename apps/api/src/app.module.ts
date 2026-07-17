@@ -8,6 +8,7 @@ import { envSchema } from "./env";
 import { EnvModule } from "./env/env.module";
 import { TrpcModule } from "./trpc/trpc.module";
 import { UsersModule } from './users/users.module';
+import { PostsModule } from './posts/posts.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { UsersModule } from './users/users.module';
     EnvModule,
     DrizzleModule,
     UsersModule,
+    PostsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

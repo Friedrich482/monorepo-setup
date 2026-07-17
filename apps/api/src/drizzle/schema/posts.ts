@@ -14,7 +14,7 @@ export const posts = pgTable("posts", {
     .references(() => users.id, { onDelete: "cascade" }),
 
   title: text("title").notNull(),
-  slug: text("slug").notNull().unique(),
+  slug: text("slug").notNull(),
   content: text("content").notNull(),
 
   publishedAt: timestamp("published_at"),
