@@ -7,6 +7,8 @@ export const envSchema = z.object({
 
   DASHBOARD_URL: z.url(),
   WEB_APP_URL: z.url(),
+
+  DATABASE_URL: z.string().trim().min(1),
 });
 
 export type Env = z.infer<typeof envSchema>;
