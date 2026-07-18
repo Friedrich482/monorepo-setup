@@ -3,12 +3,13 @@ import { ConfigModule } from "@nestjs/config";
 
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
+import { AuthModule } from "./auth/auth.module";
 import { DrizzleModule } from "./drizzle/drizzle.module";
 import { envSchema } from "./env";
 import { EnvModule } from "./env/env.module";
+import { PostsModule } from "./posts/posts.module";
 import { TrpcModule } from "./trpc/trpc.module";
-import { UsersModule } from './users/users.module';
-import { PostsModule } from './posts/posts.module';
+import { UsersModule } from "./users/users.module";
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { PostsModule } from './posts/posts.module';
     EnvModule,
     DrizzleModule,
     UsersModule,
+    AuthModule,
     PostsModule,
   ],
   controllers: [AppController],
