@@ -17,7 +17,7 @@ export class PostsRouter {
         create: this.trpcService
           .protectedProcedure()
           .input(CreatePostDto)
-          .query(async ({ ctx, input }) =>
+          .mutation(async ({ ctx, input }) =>
             this.postsService.create({ ...input, authorId: ctx.user.sub }),
           ),
 
