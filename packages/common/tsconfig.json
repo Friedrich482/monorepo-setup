@@ -1,0 +1,16 @@
+{
+  "extends": "../typescript-config/base.json",
+
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": "src",
+    "composite": true,
+    "incremental": true,
+    "esModuleInterop": true,
+    "paths": {
+      "@repo/typescript-config/*": ["../typescript-config/*"]
+    }
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
+}

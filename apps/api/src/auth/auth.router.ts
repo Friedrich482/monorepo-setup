@@ -1,7 +1,10 @@
 import { TrpcService } from "@/trpc/trpc.service";
 import { Injectable } from "@nestjs/common";
+import {
+  LoginSchema as LoginDto,
+  RegisterSchema as RegisterDto,
+} from "@repo/common/types-schemas";
 
-import { LoginDto, RegisterDto } from "./auth.dto";
 import { AuthService } from "./auth.service";
 
 @Injectable()
@@ -46,6 +49,12 @@ export class AuthRouter {
               maxAge: this.COOKIE_MAX_AGE,
             });
           }),
+
+        checkAuthStatus: this.trpcService
+          .protectedProcedure()
+          .query(async ({ ctx }) =>
+            this.authService.checkAuthStatus({ user: ctx.user }),
+          ),
       }),
     };
   }

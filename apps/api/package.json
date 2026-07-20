@@ -30,6 +30,7 @@
     "@nestjs/jwt": "^11.0.2",
     "@nestjs/mapped-types": "*",
     "@nestjs/platform-express": "^10.0.0",
+    "@repo/common": "*",
     "@trpc/server": "^11.17.0",
     "bcrypt": "^6.0.0",
     "cookie-parser": "^1.4.7",

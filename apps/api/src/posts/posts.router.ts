@@ -1,7 +1,8 @@
 import { TrpcService } from "@/trpc/trpc.service";
 import { Injectable } from "@nestjs/common";
+import { CreatePostSchema as CreatePostDto } from "@repo/common/types-schemas";
 
-import { CreatePostDto, FindOnePostDto } from "./posts.dto";
+import { FindOnePostDto } from "./posts.dto";
 import { PostsService } from "./posts.service";
 
 @Injectable()

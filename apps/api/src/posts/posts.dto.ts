@@ -1,13 +1,12 @@
 import z from "zod";
 
-export const CreatePostDto = z.object({
-  title: z.string().min(1).max(150),
-  slug: z.string().min(1).max(150),
-  content: z.string().min(1),
-});
+import {
+  CreatePostSchema as CreatePostDto,
+  SlugSchema,
+} from "@repo/common/types-schemas";
 
 export const FindOnePostDto = z.object({
-  slug: z.string().min(1).max(150),
+  slug: SlugSchema,
 });
 
 type AuthorId = { authorId: string };

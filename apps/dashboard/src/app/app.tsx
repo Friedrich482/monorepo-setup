@@ -2,10 +2,11 @@ import { useState } from "react";
 import { Outlet } from "react-router";
 import superjson from "superjson";
 
-import { ThemeProvider } from "@/providers/theme-provider";
 import { isTRPCClientError, TRPCProvider } from "@/utils/trpc";
 import type { AppRouter } from "@repo/trpc/router";
+import { ThemeProvider } from "@repo/ui/providers/theme-provider";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { createTRPCClient, httpBatchLink } from "@trpc/client";
 
 // we define our tanstack query QueryClient
@@ -66,6 +67,7 @@ export const App = () => {
   return (
     <ThemeProvider defaultTheme="dark">
       <QueryClientProvider client={queryClient}>
+        <ReactQueryDevtools initialIsOpen={false} position="bottom" />
         {/* we wrap the entire app in the TRPCProvider */}
         <TRPCProvider trpcClient={trpcClient} queryClient={queryClient}>
           <Outlet />

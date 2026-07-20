@@ -4,9 +4,13 @@ import { JWTDtoType } from "@/common/dto";
 import { UsersService } from "@/users/users.service";
 import { Injectable } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
+import {
+  LoginSchemaType as LoginDtoType,
+  RegisterSchemaType as RegisterDtoType,
+} from "@repo/common/types-schemas";
 import { TRPCError } from "@trpc/server";
 
-import { LoginDtoType, RegisterDtoType } from "./auth.dto";
+import { CheckAuthStatusDtoType } from "./auth.dto";
 
 @Injectable()
 export class AuthService {
@@ -59,5 +63,12 @@ export class AuthService {
     return {
       accessToken: token,
     };
+  }
+
+  async checkAuthStatus(checkAuthStatusDto: CheckAuthStatusDtoType) {
+    const { user } = checkAuthStatusDto;
+
+    // the protectedProcedure check has been passed so the user is authenticated
+    return { isAuthenticated: true, user };
   }
 }
