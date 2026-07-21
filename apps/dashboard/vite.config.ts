@@ -1,3 +1,4 @@
+import { visualizer } from "rollup-plugin-visualizer";
 import { fileURLToPath, URL } from "url";
 import { defineConfig } from "vite";
 import commonjs from "vite-plugin-commonjs";
@@ -18,8 +19,30 @@ export default defineConfig({
     commonjs(),
     babel({ presets: [reactCompilerPreset()] }),
     tailwindcss(),
+    visualizer({
+      open: true,
+      filename: "dist/deps.html",
+    }),
   ],
   server: {
     port: 5175,
+  },
+  build: {
+    rolldownOptions: {
+      output: {
+        codeSplitting: {
+          groups: [
+            {
+              name: "react-vendor",
+              test: /node_modules[\\/]react/,
+            },
+            {
+              name: "zod-vendor",
+              test: /node_modules[\\/]zod/,
+            },
+          ],
+        },
+      },
+    },
   },
 });

@@ -36,7 +36,7 @@ export const FallBackRender = ({
         <Button
           variant="outline"
           onClick={resetErrorBoundary}
-          className="hover:text-destructive"
+          className="hover:text-destructive h-10"
         >
           <RotateCcw /> Retry
         </Button>

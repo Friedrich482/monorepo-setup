@@ -4,6 +4,7 @@ import superjson from "superjson";
 
 import { isTRPCClientError, TRPCProvider } from "@/utils/trpc";
 import type { AppRouter } from "@repo/trpc/router";
+import { Toaster } from "@repo/ui/components/ui/sonner";
 import { ThemeProvider } from "@repo/ui/providers/theme-provider";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
@@ -71,6 +72,7 @@ export const App = () => {
         {/* we wrap the entire app in the TRPCProvider */}
         <TRPCProvider trpcClient={trpcClient} queryClient={queryClient}>
           <Outlet />
+          <Toaster />
         </TRPCProvider>
       </QueryClientProvider>
     </ThemeProvider>

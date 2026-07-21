@@ -27,7 +27,7 @@ export const Posts = () => {
         FallbackComponent={({ error, resetErrorBoundary }) => (
           <FallBackRender
             error={error}
-            className="pt-8"
+            className="pt-8h-86 w-1/2 max-sm:w-3/4"
             resetErrorBoundary={resetErrorBoundary}
           />
         )}

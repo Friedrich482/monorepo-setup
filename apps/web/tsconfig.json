@@ -1,4 +1,9 @@
 {
+  "references": [
+    {
+      "path": "../../packages/trpc/tsconfig.json"
+    }
+  ],
   "compilerOptions": {
     "paths": {
       "@/*": ["./src/*"]
