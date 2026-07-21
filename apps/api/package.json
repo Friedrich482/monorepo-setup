@@ -15,7 +15,7 @@
     "start:prod": "node dist/main",
     "generate": "npx drizzle-kit generate",
     "migrate": "npx drizzle-kit migrate",
-    "studio": "drizzle-kit studio",
+    "studio": "npx drizzle-kit studio",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest",
     "test:watch": "jest --watch",
